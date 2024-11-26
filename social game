@@ -2,6 +2,13 @@
 import statistics
 
 num_players = int(input("Enter the number of players: "))
+question = input("Enter the question: ")
+print(question)
+high_range = int(input("Enter the high range: "))
+low_range = int(input("Enter the low range: "))
+print(high_range, low_range)
+
+
 data_list = []
 # for i in range(num_players):
 #     data_list.append([])
@@ -12,6 +19,9 @@ for i in range(num_players):
     data_per = []
     for j in range(num_players):
         guess = input(f"Player {i+1}, enter your guess for player {j+1}: ")
+        if int(guess) > high_range or int(guess) < low_range:
+            print("Invalid guess, please enter a number between", low_range, "and", high_range)
+            guess = input(f"Player {i+1}, enter your guess for player {j+1}: ")
         data_per.append([j+1, int(guess)])
     data_list.append([i+1, data_per])
 
@@ -65,8 +75,12 @@ for i in range(num_players):
 
 # Find player with best other-awareness (lowest difference)
 min_other_awareness = min(other_awareness, key=lambda x: x[1])
-print(f"Player {min_other_awareness[0]} has the best other-awareness")
+for i in range(num_players):
+    if other_awareness[i][1] == min_other_awareness[1]:
+        print(f"Player {other_awareness[i][0]} has the best other-awareness")
 
 # Find player with best self-awareness (lowest difference)
 min_self_awareness = min(self_awareness, key=lambda x: x[1])
-print(f"Player {min_self_awareness[0]} has the best self-awareness")
+for i in range(num_players):
+    if self_awareness[i][1] == min_self_awareness[1]:
+        print(f"Player {self_awareness[i][0]} has the best self-awareness")
