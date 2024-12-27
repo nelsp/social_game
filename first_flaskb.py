@@ -152,7 +152,7 @@ def display_results():
             submissions = f.readlines()
             for line in submissions:
                 # Extract player name from the line format "timestamp - playername: numbers"
-                player_name = line.split('-')[1].split(':')[0].strip()
+                player_name = line.split('- ')[1].split(':')[0].strip()
                 submitted_players.append(player_name)
         
         current_players = len(submitted_players)
