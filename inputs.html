@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Inputs</title>
+  </head>
+  <body>
+    <h1>Enter the inputs:</h1>
+    {% if message %}
+    <div style="color: green; margin-bottom: 20px;">
+    {{ message }}
+    </div>
+    {% endif %}
+
+    <h2>{{ question }}</h2>
+    <p>Please enter values between {{ low_range }} and {{ high_range }}</p>
+
+    <form action="/submit" method="post">
+        <label for="player_name">Your Name:</label>
+    <input type="text" name="player_name" required><br><br>
+    
+    {% for i in range(num_inputs) %}
+        <label for="input_{{i}}">Number {{i+1}}:</label>
+        <input type="number" 
+               name="input_{{i}}" 
+               min="{{ low_range }}" 
+               max="{{ high_range }}"
+               required><br>
+    {% endfor %}
+    
+        <input type="submit" value="Submit">
+    </form> 
+  </body>
+</html>

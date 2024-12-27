@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+html>
+head>
+   <title>Waiting for Players</title>
+   <meta http-equiv="refresh" content="2;url={{ url_for('display_results') }}">
+   <style>
+       .player-list {
+           margin: 20px;
+           padding: 15px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+           background-color: #f9f9f9;
+       }
+       .submitted {
+           color: green;
+           margin: 5px 0;
+       }
+       .waiting {
+           color: #999;
+           margin: 5px 0;
+       }
+   </style>
+   <script>
+       // Your existing JavaScript for checking results
+       setInterval(function() {
+           fetch("{{ url_for('display_results') }}")
+               .then(response => response.text())
+               .then(html => {
+                   if (html.includes("Game Results")) {
+                       window.location.href = "{{ url_for('display_results') }}";
+                   }
+               });
+       }, 2000);
+   </script>
+/head>
+body>
+   <h1>Waiting for Players</h1>
+   <p>Current submissions: {{ current_submissions }} / {{ total_needed }}</p>
+   
+   <div class="player-list">
+       <h3>Submissions Status:</h3>
+       {% for player in submitted_players %}
+           <div class="submitted">✓ {{ player }} has submitted</div>
+       {% endfor %}
+       
+       {% for i in range(total_needed - current_submissions) %}
+           <div class="waiting">○ Waiting for player...</div>
+       {% endfor %}
+   </div>
+   
+   <p>This page will automatically update when all players have submitted.</p>
+/body>
+/html>
