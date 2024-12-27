@@ -23,6 +23,20 @@ def parse_inputs_file():
 
 print(parse_inputs_file())
 
+def handle_game_completion(num_players, submissions):
+    if len(submissions) == num_players:
+        # Create player dictionary from submissions
+        player_dic = read_log(num_players)
+        
+        # Calculate winners
+        self_awareness, other_awareness = calc_winners1b(player_dic)
+        
+        return {
+            'self_awareness_winner': self_awareness,
+            'other_awareness_winner': other_awareness
+        }
+    return None
+
 
 # # Example usage:
 # app.route('/results')
