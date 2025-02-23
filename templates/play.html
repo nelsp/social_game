@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Your Guesses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .input-group {
+            margin: 10px 0;
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ question }}</h1>
+    
+    <div class="form-container">
+        <p>Enter a number between {{ low_range }} and {{ high_range }}</p>
+        
+        <form action="{{ url_for('submit') }}" method="post">
+            <div class="input-group">
+                <label for="player_name">Your Name:</label>
+                <input type="text" id="player_name" name="player_name" required>
+            </div>
+            
+            {% for i in range(num_players) %}
+            <div class="input-group">
+                <label for="input_{{i+1}}">Player {{i+1}}'s number:</label>
+                <input type="number" 
+                       id="input_{{i+1}}" 
+                       name="input_{{i+1}}" 
+                       min="{{ low_range }}" 
+                       max="{{ high_range }}" 
+                       step="any"
+                       required>
+            </div>
+            {% endfor %}
+            
+            <input type="submit" value="Submit Guesses">
+        </form>
+    </div>
+</body>
+</html>

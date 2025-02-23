@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share Game Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .share-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+        .link {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            margin: 20px 0;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .success-message {
+            display: none;
+            color: #2ecc71;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function copyLink() {
+            navigator.clipboard.writeText('{{ play_url }}')
+                .then(() => {
+                    const message = document.createElement('div');
+                    message.textContent = 'Link copied!';
+                    message.className = 'success-message';
+                    message.style.display = 'block';
+                    
+                    const button = document.querySelector('button');
+                    button.parentNode.insertBefore(message, button.nextSibling);
+                    
+                    setTimeout(() => {
+                        message.style.display = 'none';
+                    }, 2000);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Game Created!</h1>
+    
+    <div class="share-container">
+        <p>Share this link with all players:</p>
+        <div class="link">
+            <a href="{{ play_url }}">{{ play_url }}</a>
+        </div>
+        <button onclick="copyLink()">Copy Link</button>
+        
+        <p>Once all players have submitted their guesses, the results will be displayed.</p>
+        <a href="{{ play_url }}" class="submit-link">Click here to submit your guesses</a>
+    </div>
+</body>
+</html>
