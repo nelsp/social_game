@@ -1,1 +1,1 @@
-html files go into a template folder
+html files go into a templates folder
