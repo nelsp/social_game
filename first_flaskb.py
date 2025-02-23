@@ -15,8 +15,8 @@ def parse_inputs_file():
                # Extract player number (assuming format "timestamp - PlayerX")
             player_num = first_part[2].split('-')[1].strip()
                
-               # Convert the comma-separated numbers into a list of integers
-            numbers = [int(num.strip()) for num in first_part[3].strip().split(',')]
+               # Convert the comma-separated numbers into a list of floats instead of integers
+            numbers = [float(num.strip()) for num in first_part[3].strip().split(',')]
                
             result_dict[player_num] = numbers
    
