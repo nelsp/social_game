@@ -1,1 +1,1 @@
-html files go into a templates folder
+templates folder contains all the html files.  the first_flask.py is what runs the code
